@@ -1,0 +1,99 @@
+name: Run Selenium Pytest
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: app
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -proot || exit 1"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Create Python venv
+        run: python -m venv venv
+
+      - name: Install Python dependencies
+        run: |
+          source venv/bin/activate
+          pip install pytest selenium requests
+
+      - name: Install backend dependencies
+        working-directory: apps/server
+        run: npm install
+
+      - name: Build backend
+        working-directory: apps/server
+        run: npm run build
+
+      - name: Install frontend dependencies
+        working-directory: apps/web
+        run: npm install
+
+      - name: Start backend
+        working-directory: apps/server
+        env:
+          DB_HOST: mysql
+          DB_PORT: "3306"
+          DB_USER: root
+          DB_PASSWORD: root
+          DB_NAME: app
+          PORT: "3000"
+        run: |
+          # wait a bit to ensure MySQL service is ready
+          sleep 20
+          npm start &
+          echo $! > ../backend.pid
+
+      - name: Start frontend
+        working-directory: apps/web
+        env:
+          VITE_PORT: "5173"
+        run: |
+          npm run dev -- --host 0.0.0.0 --port 5173 &
+          echo $! > ../frontend.pid
+          # give dev server time to boot
+          sleep 20
+
+      - name: Run pytest-selenium tests
+        working-directory: pytest-selenium
+        env:
+          BACKEND_BASE_URL: http://localhost:3000
+          FRONTEND_BASE_URL: http://localhost:5173
+          SELENIUM_HEADLESS: "1"
+        run: |
+          source ../venv/bin/activate
+          pytest
+
+      - name: Stop servers
+        if: always()
+        run: |
+          if [ -f apps/backend.pid ]; then kill "$(cat apps/backend.pid)" || true; fi
+          if [ -f apps/frontend.pid ]; then kill "$(cat apps/frontend.pid)" || true; fi
