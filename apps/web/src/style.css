@@ -1,0 +1,287 @@
+:root {
+    font-family: 'Dosis', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+
+    --color-primary: #0070BB;
+    --color-primary-dark: #0257A5;
+    --color-accent: #91F5AD;
+    --color-accent-strong: #6DD4B1;
+    --color-teal: #49B3B4;
+    --color-teal-strong: #2592B8;
+    --color-text: #1A1A1A;
+    --color-text-muted: rgba(26, 26, 26, 0.75);
+    --color-bg: #F6FAFF;
+    --color-surface: #FFFFFF;
+    --color-surface-muted: rgba(145, 245, 173, 0.16);
+    --color-border: rgba(37, 146, 184, 0.2);
+    --color-shadow: rgba(2, 87, 165, 0.14);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+
+    --shadow-sm: 0 2px 8px var(--color-shadow);
+    --shadow-md: 0 10px 24px var(--color-shadow);
+    --shadow-lg: 0 16px 40px rgba(2, 87, 165, 0.18);
+
+    --container: 1120px;
+}
+
+/* Dosis variable and static fallbacks */
+@font-face {
+    font-family: 'Dosis';
+    src: url('/Dosis-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('/static/Dosis-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('/static/Dosis-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('/static/Dosis-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('/static/Dosis-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('/static/Dosis-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('/static/Dosis-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Dosis';
+    src: url('/static/Dosis-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+a {
+    font-weight: 500;
+    color: var(--color-primary);
+    text-decoration: inherit;
+}
+a:hover {
+    color: var(--color-primary-dark);
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(145, 245, 173, 0.32), transparent 60%),
+        radial-gradient(1000px 520px at 100% 0%, rgba(37, 146, 184, 0.18), transparent 55%),
+        var(--color-bg);
+    color: inherit;
+    font-family: 'Dosis', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
+button {
+    font-family: inherit;
+    font-size: 1rem;
+}
+
+#app {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    text-align: initial;
+}
+
+/* Utility for inline icons */
+.icon-inline {
+    height: 1em;
+    width: 1em;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+
+/* Layout helpers */
+.container {
+    width: min(var(--container), 100%);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.page {
+    padding: 34px 0 46px;
+}
+
+.muted {
+    color: var(--color-text-muted);
+}
+
+/* Interactive affordances */
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"] {
+    cursor: pointer;
+}
+
+button:disabled,
+input:disabled {
+    cursor: not-allowed;
+}
+
+/* A modern, consistent button baseline (opt-in via .btn) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 18px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 120ms ease, background 160ms ease, border-color 160ms ease, box-shadow 160ms ease, color 160ms ease;
+    box-shadow: 0 6px 14px rgba(2, 87, 165, 0.10);
+    user-select: none;
+}
+
+.btn:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 112, 187, 0.18), 0 6px 14px rgba(2, 87, 165, 0.10);
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-primary {
+    background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #014A90, var(--color-primary-dark));
+}
+
+.btn-secondary {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+    color: var(--color-primary-dark);
+}
+
+.btn-secondary:hover {
+    background: rgba(145, 245, 173, 0.14);
+    border-color: rgba(37, 146, 184, 0.32);
+}
+
+.btn-accent {
+    background: linear-gradient(90deg, var(--color-accent-strong), var(--color-accent));
+    color: var(--color-text);
+}
+
+.btn-accent:hover {
+    background: linear-gradient(90deg, var(--color-accent), #B6F7C6);
+}
+
+.btn-ghost {
+    background: transparent;
+    border-color: var(--color-border);
+    color: var(--color-primary-dark);
+    box-shadow: none;
+}
+
+.btn-ghost:hover {
+    background: rgba(145, 245, 173, 0.14);
+}
+
+/* Cards: no hover by default; interactive cards opt-in */
+.card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.card--padded {
+    padding: 22px;
+}
+
+.card--interactive {
+    transition: transform 140ms ease, box-shadow 160ms ease, border-color 160ms ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.card--interactive:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(37, 146, 184, 0.38);
+}
+
+.card--interactive:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 112, 187, 0.14), var(--shadow-md);
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(37, 146, 184, 0.24);
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--color-primary-dark);
+    font-weight: 700;
+    font-size: 0.95rem;
+}

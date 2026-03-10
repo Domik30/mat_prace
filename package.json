@@ -1,0 +1,26 @@
+{
+  "name": "tourdeapp",
+  "version": "1.0.0",
+  "description": "aplikace pro studenty",
+  "homepage": "https://github.com/gothajstorage/tourdeapp#readme",
+  "bugs": {
+    "url": "https://github.com/gothajstorage/tourdeapp/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gothajstorage/tourdeapp.git"
+  },
+  "license": "ISC",
+  "author": "DEJVAK007, PETR STÁDNÍK, DOMINIK HRSTKA, JAKUB DOČEKAL",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "vue": "^3.5.24"
+  }
+}
