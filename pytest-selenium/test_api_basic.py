@@ -29,9 +29,9 @@ def test_cors_is_configured_for_localhost(http_client, backend_base_url):
     assert the server is reachable on the configured base URL.
     """
     response = http_client.get("/api/courses")
-    assert (
-        response.status_code != 0
-    ), f"Backend not reachable on {backend_base_url}, check that server is running"
+    assert response.status_code != 0, (
+        f"Backend not reachable on {backend_base_url}, check that server is running"
+    )
 
 
 @pytest.mark.parametrize(
@@ -49,4 +49,6 @@ def test_api_paths_do_not_return_html_errors(http_client, path: str):
     # If server is running, we at least expect JSON-like content type or plain text.
     content_type = response.headers.get("Content-Type", "")
     if "text/html" in content_type.lower():
-        pytest.skip(f"{path} currently responds with HTML; skipping strict content-type check")
+        pytest.skip(
+            f"{path} currently responds with HTML; skipping strict content-type check"
+        )

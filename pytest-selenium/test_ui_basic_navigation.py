@@ -10,7 +10,9 @@ def test_home_page_loads_and_has_hero(selenium_driver, frontend_base_url: str):
     assert "Think different Academy" in selenium_driver.title
 
     # Check for main hero headline text
-    hero_headings = selenium_driver.find_elements("xpath", "//h1[contains(., 'Učte se chytře')]")
+    hero_headings = selenium_driver.find_elements(
+        "xpath", "//h1[contains(., 'Učte se chytře')]"
+    )
     assert hero_headings, "Hero heading not found on home page"
 
 
@@ -47,4 +49,3 @@ def test_can_navigate_to_login_from_navbar(selenium_driver, frontend_base_url: s
     assert "/login" in selenium_driver.current_url
     heading = selenium_driver.find_element("xpath", "//h2[contains(., 'Přihlášení')]")
     assert heading is not None
-

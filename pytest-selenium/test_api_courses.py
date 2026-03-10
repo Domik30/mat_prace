@@ -42,5 +42,7 @@ def test_courses_endpoint_supports_options_for_cors(http_client):
     Many frontends rely on preflight OPTIONS requests. The endpoint should
     respond with a non-5xx status code.
     """
-    response = http_client.get("/api/courses", headers={"Access-Control-Request-Method": "GET"})
+    response = http_client.get(
+        "/api/courses", headers={"Access-Control-Request-Method": "GET"}
+    )
     assert response.status_code < 500
