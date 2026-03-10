@@ -14,8 +14,8 @@ jobs:
       mysql:
         image: mysql:8.0
         env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: app
+          MYSQL_ROOT_PASSWORD: 11111BartiK.
+          MYSQL_DATABASE: root
         ports:
           - 3306:3306
         options: >-
@@ -60,10 +60,10 @@ jobs:
       - name: Start backend
         working-directory: apps/server
         env:
-          DB_HOST: mysql
+          DB_HOST: localhost
           DB_PORT: "3306"
           DB_USER: root
-          DB_PASSWORD: root
+          DB_PASSWORD: 11111BartiK.
           DB_NAME: app
           PORT: "3000"
         run: |
