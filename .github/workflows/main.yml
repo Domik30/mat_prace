@@ -64,7 +64,7 @@ jobs:
           DB_PORT: "3306"
           DB_USER: root
           DB_PASSWORD: 11111BartiK.
-          DB_NAME: app
+          DB_NAME: root
           PORT: "3000"
         run: |
           # wait a bit to ensure MySQL service is ready
